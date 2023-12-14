@@ -1,0 +1,5 @@
+Budget Tracker
+
+Input: Various account information for AMEX, Chase, other accounts using API calls and GUI inputs
+Output: Requested graphs or tables with spending information and categories
+
