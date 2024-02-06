@@ -3,6 +3,7 @@ import argparse
 import pandas as pd
 from excelTransactionsAccess import ExcelTransactions
 from transactionClass import Transactions
+from SQLdbAction import SQLdbAction
 
 def main():
     #enable argument parsers
@@ -34,10 +35,15 @@ def main():
             for ct, elem in pd_dataframe.iterrows():
                 trans_class = Transactions(elem['Transaction Date'], elem['Description'], elem['Category'], elem['Amount'])
                 transaction_df_list.append(trans_class)
-        print(transaction_df_list)
 
+    transaction_user_db = '{user}_transactions'.format(user=user)
+    created_table = SQLdbAction(transaction_user_db)
+    created_table.insert_transaction_list(transaction_df_list)
 
-
+    data = created_table.fetch_data('''SELECT * FROM {db_name}'''.format(db_name=created_table.db_name))
+    for elem in data:
+        print(elem)
+    print(len(data))
 
 if __name__ == "__main__":
     main()

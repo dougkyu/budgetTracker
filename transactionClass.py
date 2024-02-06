@@ -26,3 +26,6 @@ class Transactions:
 
     def __repr__(self):
         return "Transaction('{}', '{}', '{}', '{}', '{}')".format(self.trans_date, self.description, self.category, self.type, self.amount)
+
+    def get_tuple_data(self):
+        return (self.trans_date, self.description, self.category, self.amount)
